@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        CI = 'true' 
+        CI = 'false' 
     }
     stages {
         stage('Build') {
