@@ -27,8 +27,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                scripts {
-                    app = docker.build("tiff19/weebapps-test")
+                script {
+                    app = docker.build("tiff19/webapps-test")
                 }
             }
         }
