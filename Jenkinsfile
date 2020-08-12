@@ -20,12 +20,24 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Delivery') {
+        stage('Build react project') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the website? (Click "Proceed" to Continue)'
-                sh './jenkins/scripts/kill.sh'
+                sh 'npm run build'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                scripts {
+                    app = docker.build("tiff19/weebapps-test")
+                }
+            }
+        }
+        // stage('Delivery') {
+        //     steps {
+        //         sh './jenkins/scripts/deliver.sh'
+        //         input message: 'Finished using the website? (Click "Proceed" to Continue)'
+        //         sh './jenkins/scripts/kill.sh'
+        //     }
+        // }
     }
 }
